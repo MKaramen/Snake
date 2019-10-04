@@ -1,7 +1,12 @@
 class Fruit {
     constructor() {
-        this.x = Math.floor((Math.random() * 20)) * 20;
-        this.y = Math.floor((Math.random() * 20)) * 20;
+        this.x = null;
+        this.y = null;
+        this.newPosition();
+    }
+
+    randomize () {
+        return Math.floor((Math.random() * 20)) * 20;
     }
 
     generate() {
@@ -14,7 +19,11 @@ class Fruit {
         if (this.x === 20) this.x -= cell;
         if (this.y === 20) this.y -= cell;
 
-
         rect(this.x, this.y, cell, cell);
+    }
+
+    newPosition () {
+        this.x = this.randomize();
+        this.y = this.randomize();
     }
 }

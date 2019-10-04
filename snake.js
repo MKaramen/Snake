@@ -11,6 +11,11 @@ class Snake {
         this.y += this.speedY;
     }
 
+    newPosition(x, y) {
+        this.x = x
+        this.y = y
+    }
+
     display() {
         fill(255);
         rect(this.x, this.y, cell, cell);
