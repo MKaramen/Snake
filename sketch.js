@@ -42,6 +42,13 @@ function draw() {
     snake.keyPressed();
     snake.checkIfDead();
 
+    snakes.forEach((s, i) => {
+      if (i > 0) {
+        if (s.x === snake.x && s.y === snake.y) {
+          inGame = !inGame;
+        }
+      }
+    })
   }
 
 }
