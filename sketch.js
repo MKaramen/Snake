@@ -1,15 +1,17 @@
 let cell = 20;
-let snake = new Snake;
-let fruit = new Fruit;
+let snake = new Snake();
+let fruit = new Fruit();
 let inGame = true;
 let score = 0;
+let speed = 10;
 const snakes = [];
 
-
 function setup() {
-  createCanvas(400, 400);
-  frameRate(10);
+  let myCanvas = createCanvas(400, 400);
+  myCanvas.parent("mainDiv");
+  frameRate(speed);
   snakes.push(snake);
+  document.getElementById("playAgain").style.display = "none";
 }
 
 console.log(score);
@@ -23,20 +25,29 @@ function draw() {
       snake.eat();
       fruit.newPosition();
       fruit.generate();
-      score += 1;     
-      console.clear()
-      console.log(score);  
-      snakes.push(new Snake)
-      console.log(snakes);
-           
+      score++;
+      console.clear();
+      console.log("score: " + score);
+      snakes.push(new Snake());
+      if (score >= 5) {
+        score += 2;
+      } else if (score >= 15) {
+        score += 3;
+      } else if (score >= 30) {
+        score += 5;
+      } else if (score >= 50) {
+        score += 10;
+      }
+      speed++;
+      frameRate(speed);
+      console.log("speed: " + speed);
     }
 
-    for (let i = snakes.length -1; i > 0; i--) {
-      console.log(snakes[i-1].x, snakes[i-1].y)
-      snakes[i].newPosition(snakes[i-1].x, snakes[i-1].y);
-      snakes[i].display()
+    for (let i = snakes.length - 1; i > 0; i--) {
+      snakes[i].newPosition(snakes[i - 1].x, snakes[i - 1].y);
+      snakes[i].display();
     }
-    
+
     snake.move();
     snake.display();
     snake.keyPressed();
@@ -48,7 +59,6 @@ function draw() {
           inGame = !inGame;
         }
       }
-    })
+    });
   }
-
 }
